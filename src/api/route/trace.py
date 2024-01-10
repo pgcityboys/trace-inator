@@ -5,10 +5,10 @@ from http import HTTPStatus
 import requests as requests
 from flask import Blueprint, request
 
-from src.api.model.path import Path
-from src.api.model.step import Step
-from src.api.model.trace import TraceModel
-from src.api.schema.trace_schema import TraceSchema
+from api.model.path import Path
+from api.model.step import Step
+from api.model.trace import TraceModel
+from api.schema.trace_schema import TraceSchema
 
 trace_api = Blueprint('trace', __name__)
 

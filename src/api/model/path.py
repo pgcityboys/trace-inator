@@ -1,4 +1,4 @@
-from src.api.model.step import Step
+from api.model.step import Step
 
 
 class Path:

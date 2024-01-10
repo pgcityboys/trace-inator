@@ -1,4 +1,4 @@
-from src.api.model.path import Path
+from api.model.path import Path
 
 
 class TraceModel:

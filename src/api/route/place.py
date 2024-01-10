@@ -3,9 +3,9 @@ import requests
 
 from http import HTTPStatus
 from flask import Blueprint, request
-from src.api.model.place import Place
-from src.api.model.places import PlacesModel
-from src.api.schema.places_schema import PlacesSchema
+from api.model.place import Place
+from api.model.places import PlacesModel
+from api.schema.places_schema import PlacesSchema
 
 place_api = Blueprint('place', __name__)
 API_URL = "https://places.googleapis.com/v1/places:searchText"
@@ -13,13 +13,29 @@ API_URL = "https://places.googleapis.com/v1/places:searchText"
 
 @place_api.route('/places')
 def trace():
+    MAX_SEEKING_RANGE = 10_000.0    # In meters
     params = request.args
     query = params.get("q")
+    lan = params.get("lan")
+    lon = params.get("lon")
+
     body = {
         "textQuery": query,
         "languageCode": "pl",
-        "maxResultCount": 10
+        "maxResultCount": 10,
     }
+
+    if lan is not None and lon is not None:
+        body["locationRestriction"] = {
+            "circle": {
+                "center": {
+                    "latitude": lan,
+                    "longitude": lon
+                },
+                "radius": MAX_SEEKING_RANGE
+            }
+        }
+
     headers = {
         "X-Goog-FieldMask": "*",
         "X-Goog-Api-Key": os.getenv("API_KEY")
