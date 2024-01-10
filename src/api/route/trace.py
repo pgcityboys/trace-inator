@@ -10,7 +10,7 @@ from src.api.model.step import Step
 from src.api.model.trace import TraceModel
 from src.api.schema.trace_schema import TraceSchema
 
-trace_api = Blueprint('api', __name__)
+trace_api = Blueprint('trace', __name__)
 
 
 @trace_api.route('/trace')
