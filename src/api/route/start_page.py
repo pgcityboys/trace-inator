@@ -6,6 +6,7 @@ from api.schema.hello import HelloSchema
 
 start_api = Blueprint('api', __name__)
 
+
 @start_api.route('/')
 def start_page():
     result = HelloModel()

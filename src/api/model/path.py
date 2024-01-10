@@ -12,13 +12,13 @@ class Path:
         self.distance = distance
         self.steps = steps
 
-    def __str__(self):
-        return str({
+    def serialize(self):
+        return {
             "start_coordinates": self.start_coordinates,
             "start_address": self.start_address,
             "end_coordinates": self.end_coordinates,
             "end_address": self.end_address,
             "distance": self.distance,
             "duration": self.duration,
-            "steps": str(self.steps)
-        })
+            "steps": self.steps
+        }

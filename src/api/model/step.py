@@ -6,11 +6,11 @@ class Step:
         self.duration = duration
         self.instruction = instruction
 
-    def __str__(self):
-        return str({
+    def serialize(self):
+        return {
             "start_coordinates": self.start_coordinates,
             "end_coordinates": self.end_coordinates,
             "distance": self.distance,
             "duration": self.duration,
             "instruction": self.instruction
-        })
+        }
