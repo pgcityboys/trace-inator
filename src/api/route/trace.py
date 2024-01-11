@@ -37,7 +37,7 @@ def path():
     points = []
     for trace in data["routes"][0]["legs"]:
         for step in trace["steps"]:
-            points.append({"lat": step["end_location"]["lat"], "lon": step["end_location"]["lng"]})
+            points.append({"lat": step["end_location"]["lat"], "lng": step["end_location"]["lng"]})
 
     return points
 
@@ -48,7 +48,7 @@ def send_request(origin: str, destination: str, travel_mode: str, waypoints: str
     url = "https://maps.googleapis.com/maps/api/directions/json?" \
           "destination=" + destination + \
           "&origin=" + origin + \
-          "&key=" + os.getenv("API_KEY")
+          "&key=" + "AIzaSyA2zGfw0xiuN49bqES2-0_lrlq-106ewjU"
 
     if travel_mode is not None:
         url += "&mode=" + travel_mode
