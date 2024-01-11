@@ -22,9 +22,24 @@ def trace():
     waypoints = params.get("waypoints")
 
     data = send_request(origin, destination, travel_mode, waypoints)
+    return data["routes"][0], HTTPStatus.OK
 
-    result = TraceModel(create_paths_for_trace(data["routes"][0]))
-    return TraceSchema().dump(result), HTTPStatus.OK
+
+@trace_api.route('/trace/path')
+def path():
+    params = request.args
+    origin = params.get("origin")
+    destination = params.get("destination")
+    travel_mode = params.get("mode")
+    waypoints = params.get("waypoints")
+
+    data = send_request(origin, destination, travel_mode, waypoints)
+    points = []
+    for trace in data["routes"][0]["legs"]:
+        for step in trace["steps"]:
+            points.append({"lat": step["end_location"]["lat"], "lon": step["end_location"]["lng"]})
+
+    return points
 
 
 def send_request(origin: str, destination: str, travel_mode: str, waypoints: str):
